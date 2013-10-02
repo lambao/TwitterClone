@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= yield(:title) %></title>
+  <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+     <header class="navbar navbar-fixed-top navbar-inverse">
+      <div class="navbar-inner">
+        <div class="container">
+          <%= link_to "Twitter Clone", '#', id: "logo" %>
+          <nav>
+            <ul class="nav pull-right">
+              <li><%= link_to "Home",    home_path %></li>
+              <li><%= link_to "Help",   help_path %></li>
+              <li><%= link_to "Sign in", signin_path %></li>
+              <li><%= link_to "Sign up", signup_path %></li>
+              <li><%= link_to "Forget password?", forgetpassword_path %></li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <%= yield %>
+</body>
+</html>

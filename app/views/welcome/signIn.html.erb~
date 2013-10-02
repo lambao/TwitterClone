@@ -1,0 +1,20 @@
+<div>
+  <form action="" method="post">
+     <fieldset>
+        <label for="nameText">Name</label>
+        <input type="text" name ="nameText"/>
+        <label for="dNameText">Display name</label>
+        <input type="text" name ="dNameText"/>
+        <label for="emailText">Email</label>
+        <input type="email" name ="emailText"/>
+        <label for="passText">Password</label>
+        <input type="password" name ="passText"/>
+        <label for="confPassText">Confirm password</label>
+        <input type="password" name ="confPassText"/>
+        <input class="btn btn-large btn-primary" type="submit" value="Sign In"/>
+     </fieldset>
+  </form>
+</div>
+
+<h1>Welcome#signUp</h1>
+<p>Find me in app/views/welcome/signIn.html.erb</p>
