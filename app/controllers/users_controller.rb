@@ -16,34 +16,28 @@ class UsersController < ApplicationController
   	end
     def show
       @user = User.find(params[:id])
+      @microposts = @user.microposts.paginate(page: params[:page])
     end
     def index
-      @users = User.all
+      @users = User.paginate(page: params[:page])
     end
     def edit 
       @user = User.find(params[:id])
     end
     def update
       @user = User.find(params[:id])
-
-      if !(@user.authenticate(params[:user][:current_password]))
-        @user.errors.add(:current_password, "is invalid.")
-        render 'edit'
-        return
-      else
-        if @user.update_attributes(params[:user]) then
-          flash[:success] = "Update successfull"
-          redirect_to @user
-        else
+      if (!params[:user][:current_password].nil?) && (!params[:user][:current_password].empty?)
+        if !(@user.authenticate(params[:user][:current_password]))
+          @user.errors.add(:current_password, "is invalid.")
           render 'edit'
+          return
         end
       end
-    end
-
-    def signed_in_user
-      unless signed_in?
-        store_location
-        redirect_to signin_url, notice: "Please sign in."
+      if @user.update_attributes(params[:user]) then
+        flash[:success] = "Update successfull"
+        redirect_to @user
+      else
+        render 'edit'
       end
     end
 
@@ -56,5 +50,5 @@ class UsersController < ApplicationController
       redirect_to(root_url) unless current_user?(@user)
     end
 
-    private :user_param, :signed_in_user, :correct_user
+    private :user_param, :correct_user
 end

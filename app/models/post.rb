@@ -1,7 +1,7 @@
 class Post < ActiveRecord::Base
-	attr_accessible :content, :parentPost, :userId
+	attr_accessible :content, :parentPost, :user_id
   	belongs_to :user, dependent: :destroy
   	default_scope -> {order('create_at DESC')}
   	validates :userId, presence: true
-  	validsates :content, presence: true, length: {maximum: 140}
+  	validates :content, presence: true, length: {maximum: 140}
 end
