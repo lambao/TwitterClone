@@ -1,14 +1,31 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
       <div class="navbar-inner">
         <div class="container">
-          <%= link_to "Twitter Clone", '#', id: "logo" %>
+          <%= link_to "Twitter Clone", root_path, id: "logo" %>
           <nav>
             <ul class="nav pull-right">
-              <li><%= link_to "Home",    home_path %></li>
+              <li><%= link_to "Home",    root_path %></li>
               <li><%= link_to "Help",   help_path %></li>
-              <li><%= link_to "Sign in", signin_path %></li>
-              <li><%= link_to "Sign up", signup_path %></li>
-              <li><%= link_to "Forget password?", forgetpassword_path %></li>
+              <% if !signed_in? %>
+                <li><%= link_to "Sign in", signin_path %></li>
+                <li><%= link_to "Sign up", signup_path %></li>
+                <li><%= link_to "Forget password?", forgetpassword_path %></li>
+              <% else %>
+                <li><%= link_to "Users", users_path %></li>
+                <li id="fat-menu" class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <%= current_user.displayName %> <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                    <li><%= link_to "Profile", edit_user_path(current_user) %></li>
+                    <li><%= link_to "Settings", newfeeds_path %></li>
+                    <li class="divider"></li>
+                    <li>
+                      <%= link_to "Sign out", signout_path, method: "delete" %>
+                    </li>
+                  </ul>
+                </li>
+              <% end %>
             </ul>
           </nav>
         </div>

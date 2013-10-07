@@ -1,19 +1,24 @@
 TwitterClone::Application.routes.draw do
   resources :users
+  resources :sessions, only: [:new, :create, :destroy]
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
   root :to => 'welcome#home'
   
-  match '/home' => 'welcome#home'
+  match '/home', to: 'welcome#home'
 
-  match '/help' => 'welcome#help'  
+  match '/help', to: 'welcome#help', via: 'get'
 
-  match '/signup' => 'users#new'  
+  match '/signup', to: 'users#new'  
 
-  match '/signin' => 'welcome#signUp'  
+  match '/signin', to: 'sessions#new'
 
-  match '/forgetpassword' => 'welcome#forgetPassword'
+  match '/signout', to: 'sessions#destroy', via: 'delete'
+
+  match '/forgetpassword', to: 'welcome#forgetPassword'
+
+  match '/newfeeds', to: 'welcome#home'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
